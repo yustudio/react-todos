@@ -27,6 +27,7 @@ export default class CreateTodo extends React.Component {
 		// this.props obtained from bind(this), which refers to component's this
 		// this.refs refers to the html elements this
 		this.props.createTask(this.refs.createInput.value);
+		this.refs.createInput.value = '';
 
 	}
 

@@ -9,6 +9,27 @@ export default class TodosListItem extends React.Component {
 		}
 	}
 
+	renderTaskSection() {
+		const { task, isCompleted } = this.props;
+		console.log("TodosListItem props: " + JSON.stringify(this.props))
+
+		const taskStyle = {
+			color: isCompleted ? 'green' : 'red',
+			cursor:'pointer'  // make it clickable
+
+		}
+
+		return(
+			 <td style={taskStyle}
+			 	 onClick={this.props.toggleTask.bind(this, task)}
+			 >
+			{/*use bind(this) not because we want to use the this context in toggleTask
+			but because we want to use the task pqssed in from app.js*/}
+			 	{task}
+			 </td>
+			);
+	}
+
 	renderActionSection() {
 		if (this.state.isEditing) {
 			return (
@@ -39,7 +60,7 @@ export default class TodosListItem extends React.Component {
 		return (			
 			
 					<tr>
-						<td>{this.props.task}</td>
+						{this.renderTaskSection()}
 						{this.renderActionSection()}  
 						{/*or this.renderActionSection.bind(this) but this 
 							is necessary only for onclick's use of setstate

@@ -19,12 +19,24 @@ export default class TodosListItem extends React.Component {
 
 		}
 
+		if (this.state.isEditing) {
+			return (
+				<td>
+					<form onSubmit={this.onSaveClick.bind(this)}>
+							{/*can have value and onChange; but for now just use defaultValue here*/}
+							{/*add ref so we can get the value of the input*/}
+							<input type="text" defaultValue={task} ref="editInput"/>
+					</form>
+				</td>
+				);
+		}
+
 		return(
 			 <td style={taskStyle}
 			 	 onClick={this.props.toggleTask.bind(this, task)}
 			 >
 			{/*use bind(this) not because we want to use the this context in toggleTask
-			but because we want to use the task pqssed in from app.js*/}
+			but because we want to use the task passed in from app.js*/}
 			 	{task}
 			 </td>
 			);
@@ -34,7 +46,7 @@ export default class TodosListItem extends React.Component {
 		if (this.state.isEditing) {
 			return (
 				<td>
-					<button>Save</button>
+					<button onClick={this.onSaveClick.bind(this)}>Save</button>
 					<button onClick={this.onCancelClick.bind(this)}>Cancel</button>
 				</td>
 			);
@@ -54,6 +66,15 @@ export default class TodosListItem extends React.Component {
 
 	onCancelClick() {
 		this.setState({isEditing: false});
+	}
+
+	onSaveClick(event) {
+		event.preventDefault();
+		const oldTask = this.props.task;
+		const newTask = this.refs.editInput.value;
+
+		this.props.saveTask(oldTask, newTask);
+		this.setState({isEditing: false})
 	}
 
 	render() {

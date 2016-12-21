@@ -20,7 +20,8 @@ export default class App extends React.Component {
 		super(props);
 
 		this.state = {
-			todos: todos  //es6 is todos
+			todos: todos,  //es6 is todos
+			error: null
 		}
 	}
 
@@ -31,7 +32,9 @@ export default class App extends React.Component {
 				<h1>React to dos app!!</h1>
 				<CreateTodo 
 					todos = {this.state.todos}  /* passed in to validate input*/
+					error = {this.state.error}
 					createTask={this.createTask.bind(this)}
+					setError={this.setError.bind(this)}
 				/>
 				<TodosList 
 					todos={this.state.todos}   // passed in iterate on each item
@@ -41,6 +44,11 @@ export default class App extends React.Component {
 				/>   				
 			</div>
 		);
+	}
+
+	setError(err) {		
+		this.state.error = err;
+		this.setState({error: this.state.error})
 	}
 
 	toggleTask(task) {

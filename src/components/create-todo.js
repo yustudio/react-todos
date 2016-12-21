@@ -5,15 +5,15 @@ export default class CreateTodo extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			error: null
-		};
+		// this.state = {
+		// 	error: null
+		// };
 	}
 
 	renderError() {
-		if (!this.state.error) {return null;}
+		if (this.props.error === null) {return null;}
 
-		return <div style={{color:'red'}}>{this.state.error}</div>
+		return <div style={{color:'red'}}>{this.props.error}</div>
 	}
 
 	render() {
@@ -39,28 +39,47 @@ export default class CreateTodo extends React.Component {
 	
 		const task = this.refs.createInput.value;
 		const validateInput = this.validateInput(task);
-
-		if (validateInput) {
-			this.setState({error: validateInput})
-			return;
-		}
+		
+		// if (validateInput) {
+		// 	this.setState({error: validateInput})
+		// 	return;
+		// }
 
 		// this.props obtained from bind(this), which refers to component's this
 		// this.refs refers to the html elements this
-		this.setState({error: null})
+		//this.setState({error: null})
+		if (!validateInput) {			
+			return;
+		}
+	
 		this.props.createTask(task);
-		this.refs.createInput.value = '';
-
+		this.refs.createInput.value = '';						
+		
 	}
 
 	validateInput(task) {
 		if (!task) {
-			return 'Please enter a task';
+			// call of the callback, that calls setState, only triggers rerendering; 
+			// need to return a value to handleCreate to either add task or exit
+			this.props.setError('Please enter a task');
+			return 0;
 		} else if (_.find(this.props.todos, todo => todo.task === task)){
-			return 'Task already exists'
+			this.props.setError('Task already exists');
+			return 0;
 		} else {
-			return null;
-		}
+			this.props.setError(null);
+			return 1;
+		}		
 	}
+
+	// validateInput(task) {
+	// 	if (!task) {
+	// 		return 'Please enter a task';
+	// 	} else if (_.find(this.props.todos, todo => todo.task === task)){
+	// 		return 'Task already exists'
+	// 	} else {
+	// 		return null;
+	// 	}
+	// }
 
 }

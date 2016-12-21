@@ -14,7 +14,7 @@ export default class TodosList extends React.Component {
 			return _.map(this.props.todos, (todo, index) => <TodosListItem key={index
 			} {...todo} {...props}/>);   
 			// when iterate through something in react, need a key. since there is no key 
-			// in todos data, use index as key
+			// in todos data, use index as key  https://facebook.github.io/react/docs/lists-and-keys.html#keys
 			// ..todo is same as task={todos.task} isCompleted={todo.isCompleted}
 		}
 

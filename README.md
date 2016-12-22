@@ -1,5 +1,5 @@
-# React Todo list application
-## Steps to run todo-list app
+# React Todo Application
+## Steps to run todo app
 * `npm install`
 * `webpack`
 * `webpack-dev-server`
@@ -10,7 +10,7 @@ Note: there are two places in the video that store state attributes at subcompon
 
 ## Other references:
 * https://facebook.github.io/react/docs/thinking-in-react.html  
-"Thiking in React" facebook react official tutorial article.
+"Thinking in React" facebook react official tutorial article.
 This is a great starting point to help someone coming from Angular to adept to React way of divide and conque problem. 
 * https://www.youtube.com/watch?v=MhkGQAoc7bc&list=PLoYCgNOIyGABj2GQSlDRjgvXtqfDxKm5b  
 Comprehensive tutorial on React.
